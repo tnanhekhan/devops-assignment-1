@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson import ObjectId
 
 client = MongoClient("mongodb://mongo:27017")
 db = client["students_db"]
@@ -14,13 +15,16 @@ def add(student=None):
     return student.student_id
 
 def get_by_id(student_id=None, subject=None):
+    student_id = ObjectId(student_id)
     student = student_collection.find_one({"_id": student_id})
     if not student:
         return 'not found', 404
     student['student_id'] = str(student['_id'])
+    del student['_id']
     return student
 
 def delete(student_id=None):
+    student_id = ObjectId(student_id)
     student = student_collection.find_one({"_id": student_id})
     if not student:
         return 'not found', 404

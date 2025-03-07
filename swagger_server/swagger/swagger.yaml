@@ -28,7 +28,6 @@ paths:
         explode: false
         schema:
           type: string
-          format: uuid
       responses:
         "200":
           description: Successful operation
@@ -55,7 +54,6 @@ paths:
         explode: false
         schema:
           type: string
-          format: uuid
       responses:
         "200":
           description: Successful operation
@@ -88,7 +86,6 @@ paths:
             application/json:
               schema:
                 type: string
-                format: uuid
                 x-content-type: application/json
         "400":
           description: "invalid input, object invalid"
