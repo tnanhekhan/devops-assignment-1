@@ -24,8 +24,7 @@ def get_by_id(student_id=None, subject=None):
     return student
 
 def delete(student_id=None):
-    student_id = ObjectId(student_id)
-    student = student_collection.find_one({"_id": student_id})
+    student = student_collection.find_one({"_id": ObjectId(student_id)})
     if not student:
         return 'not found', 404
     student_collection.delete_one({"_id": student_id})
