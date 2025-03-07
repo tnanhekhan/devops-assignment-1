@@ -10,20 +10,19 @@ def add(student=None):
         return 'already exists', 409
     student_dict = student.to_dict()
     result = student_collection.insert_one(student_dict)
-    student.student_id = result.inserted_id
-    return student.student_id
+    student.student_id = str(result.inserted_id)
+    return student.student_id, 200
 
 def get_by_id(student_id=None, subject=None):
     student = student_collection.find_one({"_id": student_id})
     if not student:
         return 'not found', 404
-    student['student_id'] = str(student_id)
-    print(student)
-    return student
+    student['student_id'] = str(student['_id'])
+    return student, 200
 
 def delete(student_id=None):
     student = student_collection.find_one({"_id": student_id})
     if not student:
         return 'not found', 404
     student_collection.delete_one({"_id": student_id})
-    return student_id
+    return student_id, 200
